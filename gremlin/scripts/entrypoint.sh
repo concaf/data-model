@@ -14,7 +14,7 @@ echo "Proceeding with JAVA_OPTIONS=$JAVA_OPTIONS"
 
 sed -i.bckp 's#host: .*#host: '$GREMLIN_HOST'#' ${GREMLIN_CONF}
 
-sed -i.bckp 's#storage.dynamodb.native-locking=false'
+sed -i.bckp 's#storage.dynamodb.native-locking=.*#storage.dynamodb.native-locking=false'   ${PROPS}
 
 if [ -n "$DYNAMODB_CLIENT_CREDENTIALS_CLASS_NAME" ]; then
     sed -i.bckp 's#storage.dynamodb.client.credentials.class-name=.*#storage.dynamodb.client.credentials.class-name='${DYNAMODB_CLIENT_CREDENTIALS_CLASS_NAME}'#' ${PROPS}
