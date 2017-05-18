@@ -14,6 +14,8 @@ echo "Proceeding with JAVA_OPTIONS=$JAVA_OPTIONS"
 
 sed -i.bckp 's#host: .*#host: '$GREMLIN_HOST'#' ${GREMLIN_CONF}
 
+sed -i.bckp 's#storage.dynamodb.native-locking=.*#storage.dynamodb.native-locking=false'   ${PROPS}
+
 if [ -n "$DYNAMODB_CLIENT_CREDENTIALS_CLASS_NAME" ]; then
     sed -i.bckp 's#storage.dynamodb.client.credentials.class-name=.*#storage.dynamodb.client.credentials.class-name='${DYNAMODB_CLIENT_CREDENTIALS_CLASS_NAME}'#' ${PROPS}
 fi
@@ -65,7 +67,7 @@ else
     sed -i.bckp 's#storage.dynamodb.stores.edgestore.capacity-read=.*#storage.dynamodb.stores.edgestore.capacity-read=25#' ${PROPS}
     sed -i.bckp 's#storage.dynamodb.stores.graphindex.capacity-read=.*#storage.dynamodb.stores.graphindex.capacity-read=25#' ${PROPS}
 fi
-
+ 
 cd ${SERVER_DIR}
 
 exec bin/gremlin-server.sh conf/gremlin-server/gremlin-server.yaml
